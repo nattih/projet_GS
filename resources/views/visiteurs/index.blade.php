@@ -283,7 +283,7 @@
               </li>
            
               
-              {{-- <li class="nav-item mt-2">
+              <li class="nav-item mt-2">
                 <a class="nav-link" data-toggle="tab" href="#tab-2">
                   <h4>Neurology</h4>
                   <p>Voluptas vel esse repudiandae quo excepturi.</p>
@@ -300,7 +300,7 @@
                   <h4>Pediatrics</h4>
                   <p>Ratione hic sapiente nostrum doloremque illum nulla praesentium id</p>
                 </a>
-              </li> --}}
+              </li>
             </ul>
             @endforeach
           </div>

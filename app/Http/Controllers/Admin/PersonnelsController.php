@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Departement;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -25,8 +26,9 @@ class PersonnelsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { 
+        $dpts=Departement::all();
+        return view('admin.departement.form', compact('dpts'));
     }
 
     /**
@@ -37,7 +39,14 @@ class PersonnelsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'nom'=> ['required','string']
+          ]);
+
+        Departement::create([
+            'nom'=>$request->nom,
+        ]);     
+        return redirect()->route('admin.personnels.create');
     }
 
     /**

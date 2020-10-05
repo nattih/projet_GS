@@ -130,7 +130,7 @@
     <div>
     <a href="#"  class="brand-link">
         <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class=" brand-image img-circle elevation-2" alt="User Image">
-        <span class="brand-text font-weight-light">  </span>
+        <span class="brand-text font-weight-light"> {{Auth::user()->name }} </span>
     </a>
   </div>
     <!-- Sidebar -->
@@ -142,7 +142,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="{{route('admin.users.index')}}" class="nav-link active">
+            <a href="{{route('admin.users.index')}}" class="nav-link active ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Accueil

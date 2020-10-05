@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Poste;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -38,7 +39,17 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'nom'=> ['required','string'],
+            'departement_id'=> ['required','integer']
+          ]);
+
+        Poste::create([
+            'nom'=>$request->nom,
+            'departement_id'=>$request->departement_id
+        ]);  
+
+        return redirect()->route('register');  
     }
 
     /**

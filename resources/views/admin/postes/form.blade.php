@@ -9,7 +9,7 @@
                 <h3 class="text-center text-bold">Ajouter une categorie</h3>
                 <a class="btn btn-danger float-left" href="{{route('events.create')}}">retour</a>
               </div> <br> <br>
-                <form action="{{route('categories.store')}}" method="post">
+                <form action=" " method="post">
                     @csrf
                     <div class="form-group">
                       <label for="nom">Entrez le nom</label>

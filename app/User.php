@@ -16,7 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'prenom', 'sexe', 'dat_naiss','residence', 'contact', 'departement_id',
+        'poste_id', 'debut_function', 'contrat', 'photo','email', 'password'
     ];
 
     /**
@@ -57,6 +58,13 @@ class User extends Authenticatable
         public function events(){
             return $this ->belongsTo('App\Event');
         }
+        public function getSexeAttribute($attributes){
+            return [
+                '0'=>'homme',
+                '1'=>'femme',
+            ][$attributes];
+       }
+
 
    }
 

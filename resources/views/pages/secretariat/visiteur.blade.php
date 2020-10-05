@@ -1,14 +1,10 @@
 @extends('layouts.app')
 @section('content')
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper"> <br>
-      <!-- Main content -->
       <div class="container-fluid">
-          <!-- Info boxes -->
         <div class="card">
           <h3 class="text-center"> Ajouter un visiteur</h3>
-
           <form class="border p-2" action="{{route('cahier.store')}}" method="post">
             @csrf
             <div class="form-group">
@@ -70,7 +66,7 @@
                 <option value="0">Homme</option>
                   <option value="1">Femme</option>
               </select>
-              @error('genre')
+                @error('genre')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
@@ -79,13 +75,9 @@
           </div>
             <button type="submit" class="btn btn-ntn">Enregister</button>
           </form>
-
-
-
         </div>
       </div>
     </div>
-  <!-- ./wrapper -->
 @endsection
 
 

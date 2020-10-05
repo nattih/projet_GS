@@ -1,16 +1,13 @@
 @extends('layouts.app')
 @section('content')
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper"> <br>
-      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- Info boxes -->
           <div class="card">
             <div class="card-header">
               @can('delete-users')
-              <a class="btn btn-ntn" href="{{ route('register') }}">{{ __('Ajouter un membre') }}</a>
+              <a class="btn btn-ntn" href="{{ route('admin.personnels.create') }}">{{ __('Ajouter un membre') }}</a>
               @endcan
             </div>
             <div class="card-body table-responsive p-0">
@@ -25,9 +22,11 @@
                   </tr>
                 </thead>
                 <tbody>
+                    <?php $i=0; ?>
                 @foreach($users as $user)
+                    <?php $i++; ?>
                     <tr>
-                        <th scope="row">{{$user->id}}</th>
+                        <th scope="row">{{$i}}</th>
                         <td >{{$user->name}}</td>
                         <td >{{$user->email}}</td>
                         <td > </td>

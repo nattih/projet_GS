@@ -1,6 +1,4 @@
 <?php
-
-use App\Http\Controllers\CategorieController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,5 +41,4 @@ Route::namespace('Secretariat')->prefix('secreta')->group(function() {
 Route::namespace('Communication')->prefix('com')->group(function() {
     Route::resource('events', 'EventsController');
     Route::resource('categories', 'CategoriesController');
-    // route::get('categarie/{id}', 'CategoriesController@show')->name('detail');
 });

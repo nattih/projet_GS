@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\CahierVisite;
+use App\Departement;
 use Illuminate\Support\Facades\Gate;
 
 use App\Http\Controllers\Controller;
+use App\Poste;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -34,7 +36,7 @@ public function __construct(){
      */
     public function create()
     {
-        //
+         //
     }
 
     /**

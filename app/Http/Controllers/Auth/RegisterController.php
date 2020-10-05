@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Departement;
 use App\Http\Controllers\Controller;
+use App\Poste;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Role;
@@ -31,10 +33,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    // protected function redirectTo()
-    // {
-    //     return redirect()->route('admin.user.index');
-    // }
+    
 
     /**
      * Create a new controller instance.
@@ -44,6 +43,13 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function showRegistrationForm()
+    {
+        $dpts=Departement::all();
+        $postes=Poste::all();
+        return view('auth.register',compact('dpts','postes'));
     }
 
     /**
@@ -56,6 +62,16 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'prenom' => ['required', 'string', 'max:255'],
+            'sexe' => ['required', 'integer'],
+            'dat_naiss' => ['required', 'string'],
+            'residence' => ['required', 'string'],
+            'contact' => ['required', 'string', 'max:8'],
+            'departement_id' => ['required', 'integer'],
+            'poste_id' => ['required', 'integer'],
+            'debut_fonction' => ['required', 'string'],
+            'contrat' => ['required', 'string'],
+            'photo' => ['required', 'image'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -69,8 +85,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         $user= User::create([
             'name' => $data['name'],
+            'prenom' => $data['prenom'],
+            'sexe' => $data['sexe'],
+            'dat_naiss' => $data['dat_naiss'],
+            'residence' => $data['residence'],
+            'contact' => $data['contact'],
+            'departement_id' => $data['departement_id'],
+            'post_id' => $data['post_id'],
+            'debut_fonction' => $data['debut_fonction'],
+            'contrat' => $data['contrat'],
+            'photo' => $data['photo'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
@@ -78,5 +105,9 @@ class RegisterController extends Controller
         $role = Role::select('id')->where('name', 'utilisateur')->first();
         $user->roles()->attach($role);
         return $user;
-    }
+    } 
+    // protected function redirectTo()
+    // {
+    //     return redirect()->route('admin.user.index');
+    // }
 }
