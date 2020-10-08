@@ -5,17 +5,17 @@
       <div class="container-fluid">
         <div class="card">
             <div class="card-header ">
-              <h2 class="text-center">Les evenements du </h2>
+              <h2 class="text-center">Les evenements du....</h2>
             </div>
               <div class="table table-responsive p-0">
-                <table id="example1" class="table table-striped">
+                <table id="example1" class="table table-hover dataTable text-nowrap ">
                   <thead>
-                  <tr>
-                    <th>N°</th>
-                    <th>Date</th>
-                    <th>Titre</th>
-                    <th>image</th>
-                    <th >Option</th>
+                  <tr class="bg-dark">
+                    <th scope="col">N°</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">image</th>
+                    <th scope="col" class="text-center">Option</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -25,8 +25,8 @@
                   <tr>
                     <td>{{$i}}</td>
                     <td>{{$event->created_at}}</td>
-                    <td> {{$event->titre}} </td>
-                    <td><img src="{{asset('storage').'/'.$event->image}}" style="width:50px;height:50px;" class="bf5 border rounded-circle"></td>
+                    <td class="text-bold"> {{$event->titre}} </td>
+                    <td><img src="{{asset('storage').'/'.$event->image}}" style="width:50px;height:50px;" class="bf5 border rounded-circle "></td>
                     <td>
                       <a href="{{route('events.show',[$event->id])}} "><button class="btn btn-success">Detail</button></a>
                       <a href="{{route('events.edit',$event->id)}} "><button class="btn btn-ntn">Editer</button></a>

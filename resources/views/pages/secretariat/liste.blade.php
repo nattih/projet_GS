@@ -7,17 +7,18 @@
         <div class="card-header ">
           <h3 class="text-center">Cahier de visite</h3>
         </div>
-        <div class="table table-responsive p-0">
-          <table id="example1" class="table table-striped">
+        <div class=" table table-responsive p-0">
+          <table id="example1" class="table  table-hover">
             <thead>
-              <tr>
-                <th>N°</th>
-                <th>Date</th>
-                <th>Nom & Prénom</th>
-                <th>CNIB</th>
-                <th>Modif</th>
-                <th>Contact</th>
-                <th>Option</th>
+              <tr class="bg-dark">
+                <th scope="col">N°</th>
+                <th scope="col">Date</th>
+                <th scope="col">Nom & Prénom</th>
+                <th scope="col">CNIB</th>
+                <th scope="col">Motif</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Genre</th>
+                <th class="text-center" scope="col">Option</th>
               </tr>
             </thead>
             <tbody>
@@ -34,11 +35,11 @@
                   <td>{{$cahier->contact}}</td>
                   <td>{{$cahier->genre}}</td>
                   <td>
-                    <a href="{{route('cahier.edit',$cahier->id)}}"><button class="btn btn-ntn">Editer</button></a>
+                    <a href="{{route('cahier.edit',$cahier->id)}}"><button class="btn btn-ntn ">Editer</button></a>
                       <form action="{{route('cahier.destroy', $cahier->id)}}" method="post" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-warning">Suprimer</button>
+                        <button type="submit" class="btn btn-warning d-inline">Suprimer</button>
                       </form>
                   </td>
                 </tr>

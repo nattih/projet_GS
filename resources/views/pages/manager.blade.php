@@ -14,7 +14,7 @@
             <div class="card-body table-responsive  p-0">
              <table class="table table-hover dataTable text-nowrap" id="exemple1">
                 <thead>
-                  <tr>
+                  <tr class="bg-dark">
                     <th scope="col">N°</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
@@ -27,8 +27,8 @@
                 @foreach($users as $user)
                 <?php $i++; ?>
                     <tr>
-                        <th scope="row">{{$i}}</th>
-                        <td >{{$user->name}}</td>
+                        <td scope="row">{{$i}}</td>
+                        <td >{{$user->name}} {{$user->prenom}}</td>
                         <td >{{$user->email}}</td>
                         <td >{{implode(' , ' , $user->roles()->get()->pluck('name')->toArray())}}</td>
                         <td >

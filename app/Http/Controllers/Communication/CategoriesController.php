@@ -56,7 +56,7 @@ class CategoriesController extends Controller
      */
     public function show($categorie)
     {
-        return view('pages.events.detail', ['events'=>Event::where('categorie_id', '=', $categorie)->paginate(4)]);
+        return view('pages.events.detail', ['events'=>Event::where('categorie_id', '=', $categorie)->paginate(4),]);
         
     }
 
