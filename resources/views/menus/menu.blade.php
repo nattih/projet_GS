@@ -118,19 +118,31 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
-            class="fas fa-th-large"></i></a>
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far icofont-options"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
+          <a href=" {{route('profil')}}" class="dropdown-item ">
+            <i class="icofont-business-man mr-2"></i> <span class="text-bold">Mon profile</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a  href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">
+            <i class="icofont-exit mr-2"></i> <span class="text-bold"> Deconnexion </span>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
+          </a>
+        </div>
       </li>
     </ul>
   </nav>
   <!-- /.navbar
-
   <! Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <div>
     <a href="#"  class="brand-link">
-        <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class=" brand-image img-circle elevation-2" alt="User Image">
-        <span class="brand-text font-weight-light"> {{Auth::user()->name }} </span>
+        <img src="{{asset('storage').'/'. Auth::user()->photo}}" style="width:50px;height:50px;" class=" brand-image img-circle elevation-2" alt="User Image">
+        <span class="brand-text font-weight-light"> {{Auth::user()->name }} {{Auth::user()->prenom }}</span>
     </a>
   </div>
     <!-- Sidebar -->
@@ -152,24 +164,24 @@
           </li>
           <li class="nav-item">
             <a href="{{route('admin.user.index')}}" class="nav-link ">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon  icofont-options"></i>
               <p>
-                User manger
+                Gestion
               </p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon icofont-users"></i>
               <p>
                 le personel
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">3</span>
+                <span class="badge badge-info right">2</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href=" {{route('admin.personnels.index')}}" class="nav-link">
+                <a href=" {{route('admin.dpts.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>liste</p>
                 </a>
@@ -178,12 +190,6 @@
                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>les rendus</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>departement</p>
                 </a>
               </li>
             </ul>
@@ -214,7 +220,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon  icofont-address-book"></i>
               <p>
                 Cahier de visite
                 <i class="fas fa-angle-left right"></i>
@@ -261,7 +267,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{route('events.index')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Salon
@@ -269,15 +275,24 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Deconnexion</a>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon icofont-archive"></i>
+              <p>
+                Archives
+                 
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a class="nav-link "  href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+              <i class="nav-icon icofont-exit"></i> Deconnexion </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
               </form>
           </li>
+          
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
   </aside>

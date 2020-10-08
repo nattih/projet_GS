@@ -15,7 +15,7 @@
                     <th>Date</th>
                     <th>Titre</th>
                     <th>image</th>
-                    <th class="conten-center">Option</th>
+                    <th >Option</th>
                   </tr>
                   </thead>
                   <tbody>

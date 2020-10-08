@@ -17,7 +17,9 @@ class EventsController extends Controller
      */
     public function index()
     {  
-        // 
+        $categori=Categorie::where('nom', '=','BUREAU')->first();
+        $events=Event::where('categorie_id', '=', $categori->id)->orderBy('created_at', 'desc')->paginate(2);
+        return view('pages.events.salon.pub',compact('events'));
     }
 
     /**
@@ -89,10 +91,16 @@ class EventsController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        $data=request()->validate([
+            'titre'=> ['required','string'],
+            'categorie_id'=> ['required','integer'],
+            'description'=> ['required','string'],
+            'image'=> ['required','image'],
+          ]);
         $categories=Categorie::all();
-        if(request('photo')){
-            $imagePath=request('photo')->store('uploads','public');
-            $event->update(array_merge($request,['photo'=>$imagePath]));
+        if(request('image')){
+            $imagePath=request('image')->store('uploads','public');
+            $event->update(array_merge($data,['image'=>$imagePath]));
           }
           else{
             

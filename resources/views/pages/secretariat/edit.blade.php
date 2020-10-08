@@ -53,7 +53,7 @@
             </div>
             <div class="form-group green-border-focus">
               <label for="exampleFormControlTextarea5">Motif de la visite</label>
-              <textarea class="form-control @error('motif') is-invalid @enderror"   placeholder="Entrer le motif" id="motif" value="{{ old('motif') ?? $cahier->motif }}" rows="1" type="text" name="motif"></textarea>
+              <textarea class="form-control @error('motif') is-invalid @enderror"   placeholder="Entrer le motif" id="motif" value="" rows="1" type="text" name="motif">{{ old('motif') ?? $cahier->motif }}</textarea>
                     @error('motif')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -62,11 +62,10 @@
             </div>
             <div class="form-group">
               <label>Sexe</label>
-              <select class="form-control @error('genre') is-invalid @enderror" name="genre" value="{{ old('genre') ?? $cahier->genre  }}" >
-                  @foreach ($cahier->getStatusOptions() as $key=>$value)
-                    <option value="{{$key}} {{$cahier->genre==$value ? 'selected' : ''}}"> {{$value}}</option>
-                  @endforeach 
-                
+              <select class="form-control custom-select  @error('genre') is-invalid @enderror" name="genre" value="{{ old('genre') ?? $cahier->genre  }}" >
+                  @foreach ($cahier->getGenreOptions() as $key=>$value)
+                    <option value="{{$key}}" {{$cahier->genre == $value ? 'selected' : ''}}> {{$value}}</option>
+                  @endforeach
               </select>
               @error('genre')
                   <span class="invalid-feedback" role="alert">
@@ -77,13 +76,9 @@
           </div>
             <button type="submit" class="btn btn-ntn">Enregister</button>
           </form>
-
-
-
         </div>
       </div>
     </div>
-  <!-- ./wrapper -->
 @endsection
 
 

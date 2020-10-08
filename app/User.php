@@ -58,14 +58,12 @@ class User extends Authenticatable
         public function events(){
             return $this ->belongsTo('App\Event');
         }
-        public function getSexeAttribute($attributes){
-            return [
-                '0'=>'homme',
-                '1'=>'femme',
-            ][$attributes];
-       }
-
-
+        public function departement(){
+            return $this ->belongsTo('App\Departement');
+        }
+        public function poste(){
+            return $this ->belongsTo('App\Poste');
+        }
    }
 
 

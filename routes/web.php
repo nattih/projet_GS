@@ -19,19 +19,20 @@ Route::get('/1', function () {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+// Route::post('utilsateur', 'UtilisateurController@create')->name('ajouter');
+
 //route accueil pour les visiteurs
 Route::get('/', 'VisiteurController@index')->name('portail');
 
 Route::get('/actualites', 'VisiteurController@actualite');
-
-
-Route::post('utilsateur', 'UtilisateurController@create')->name('ajouter');
+Route::get('/profil', 'VisiteurController@profil')->name('profil');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
     Route::resource('users', 'UsersController');
     Route::resource('user', 'ManagerController');
-    Route::resource('personnels', 'PersonnelsController');
+    Route::resource('dpts', 'PersonnelsController');
 });
+
 
 Route::namespace('Secretariat')->prefix('secreta')->group(function() {
     Route::resource('cahier', 'SecretaireController');

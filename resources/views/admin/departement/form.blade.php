@@ -9,7 +9,7 @@
                     <div>
                         <h3 class="text-center text-bold">Ajouter un département</h3>
                     </div>  
-                    <form action="{{route('admin.personnels.store')}}" method="post">
+                    <form action="{{route('admin.dpts.store')}}" method="post">
                             @csrf
                         <div class="form-group">
                                 <label for="nom">Entrez le nom</label>

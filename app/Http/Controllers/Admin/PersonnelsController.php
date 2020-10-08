@@ -16,8 +16,8 @@ class PersonnelsController extends Controller
      */
     public function index()
     {
-        $users= User::paginate(5);
-        return view('pages.liste')->with('users',$users);
+         $dpts=Departement::all();
+        return view('pages.liste',compact('dpts'));
     }
 
     /**
@@ -46,7 +46,7 @@ class PersonnelsController extends Controller
         Departement::create([
             'nom'=>$request->nom,
         ]);     
-        return redirect()->route('admin.personnels.create');
+        return redirect()->route('admin.dpts.create');
     }
 
     /**
@@ -55,9 +55,9 @@ class PersonnelsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($dpt)
     {
-        //
+        return view('admin.departement.detail', ['users'=>User::where('departement_id', '=', $dpt)->get()]);
     }
 
     /**
@@ -68,7 +68,7 @@ class PersonnelsController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        // return view('admin.profil.edit', compact('user'));
     }
 
     /**

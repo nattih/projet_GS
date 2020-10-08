@@ -5,9 +5,9 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-header ">
-          <h3 class="card-title">Cahier de visite</h3>
+          <h3 class="text-center">Cahier de visite</h3>
         </div>
-        <div class="card-body table-responsive p-0">
+        <div class="table table-responsive p-0">
           <table id="example1" class="table table-striped">
             <thead>
               <tr>

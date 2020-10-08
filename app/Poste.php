@@ -12,4 +12,7 @@ class Poste extends Model
     public function poste(){
         return $this ->belongsTo('App\Departement');
     }
+    public function user(){
+        return $this ->hasOne('App\User');
+    }
 }

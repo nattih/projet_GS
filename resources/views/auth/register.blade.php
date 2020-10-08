@@ -6,7 +6,7 @@
         <div class="container-fluid">
           <div class="container">
             <p class="text-center text-bold"> <span>Nouveau membre</span> 
-              <a class="btn btn-success" href="{{ route('admin.personnels.create') }}">Nouveau dpt/poste</a>
+              <a class="btn btn-success" href="{{ route('admin.dpts.create') }}">Nouveau dpt/poste</a>
             </p>
               <hr>
             <div class="row justify-content-center">
@@ -40,7 +40,8 @@
                           <label>Sexe</label>
                           <select id="inputState" class="form-control custom-select @error('sexe') is-invalid @enderror" type="text" name="sexe" placeholder="" value="{{ old('sexe') }}">
                             <option> Choose...</option>
-                              <option>Uzbekistan</option>
+                              <option value="homme">Homme</option>
+                              <option value="femme">Femme</option>
                           </select>
                               @error('sexe')
                                   <span class="invalid-feedback" role="alert">

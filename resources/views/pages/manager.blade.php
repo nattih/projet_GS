@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="content-wrapper"> <br>
       <section class="content">
@@ -10,8 +11,8 @@
               <a class="btn btn-ntn" href="{{ route('register') }}">{{ __('Ajouter un membre') }}</a>
               @endcan
             </div>
-            <div class="card-body table-responsive p-0">
-             <table class="table table-hover text-nowrap">
+            <div class="card-body table-responsive  p-0">
+             <table class="table table-hover dataTable text-nowrap" id="exemple1">
                 <thead>
                   <tr>
                     <th scope="col">N°</th>
@@ -46,8 +47,21 @@
               @endforeach
                 </tbody>
               </table>
+              <button id="test">test</button>
               {{$users->links()}}
             </div>
         </div>
       </section>
+      <script>
+        $('#test').click(function(){
+          alert('ok');
+        })
+        $(function () {
+          $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": true,
+          });
+
+        });
+      </script>
 @endsection

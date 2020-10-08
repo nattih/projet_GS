@@ -25,8 +25,9 @@ class SecretaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('pages.secretariat.visiteur');
+    { 
+        $cahier=Cahier::all();
+        return view('pages.secretariat.visiteur',compact('cahier'));
     }
     /**
      * Store a newly created resource in storage.
@@ -43,7 +44,7 @@ class SecretaireController extends Controller
         //     'contact'=> ['required','string','min:8'],
         //     'motif'=> ['required','string'],
         //     'genre'=> ['required','integer'],
-        //     'users_id'=> ['required','integer']
+        //     'user_id'=> ['required','integer']
         //   ]);
         Cahier::create([
             'nom'=>$request->nom,

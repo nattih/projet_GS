@@ -14,15 +14,13 @@ class Cahier extends Model
     }
 
     public function getGenreAttribute($attributes){
-        return [
-            '0'=>'homme',
-            '1'=>'femme',
-        ][$attributes];
+        return  $this->getGenreOptions()[$attributes];
    }
-    public function getStatusOptions(){
+    public function getGenreOptions(){
          return [ 
              '0'=>'homme',
-             '1'=>'femme'
+             '1'=>'femme',
+             '2'=> 'autre'
          ];
     }
 }

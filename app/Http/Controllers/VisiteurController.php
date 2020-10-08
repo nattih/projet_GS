@@ -14,9 +14,8 @@ class VisiteurController extends Controller
         $events=Event::where('categorie_id', '=', $categori->id)->get();
         return view('visiteurs.index',compact('events'));
     }
-//     public function actualite(){
-//     $events=Event::all();
-     
-// // return view('visiteurs.index',compact('events'));
-//     }
+    public function profil()
+    {
+        return view('admin.profile.edit');
+    }
 }
