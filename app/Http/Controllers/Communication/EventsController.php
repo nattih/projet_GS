@@ -103,7 +103,7 @@ class EventsController extends Controller
             $event->update(array_merge($data,['image'=>$imagePath]));
           }
           else{
-            
+        
             $event->titre=$request->titre;
             $event->categorie_id=$request->categorie_id;
             $event->description=$request->description;
