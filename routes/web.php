@@ -25,14 +25,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'VisiteurController@index')->name('portail');
 
 Route::get('/actualites', 'VisiteurController@actualite');
-Route::get('/profil', 'VisiteurController@profil')->name('profil');
+Route::get('/pro', 'VisiteurController@profil')->name('profi');
+Route::post('/edit', 'VisiteurController@profile')->name('editer');
+Route::post('/pasword', 'VisiteurController@password')->name('password');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
     Route::resource('users', 'UsersController');
     Route::resource('user', 'ManagerController');
     Route::resource('dpts', 'PersonnelsController');
 });
-
+ // profil d'un user
+Route::resource('profil', 'ProfilController');
 
 Route::namespace('Secretariat')->prefix('secreta')->group(function() {
     Route::resource('cahier', 'SecretaireController');

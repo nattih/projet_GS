@@ -18,7 +18,7 @@
                 <div class="row ">
                     <div class="col-md-4 text-center">
                         <div class="card " >
-                            <div class=""> <br>
+                            <div class=""> 
                                 <div class=" " >
                                     <img class="img-circle" style="height:262.5px;" src="{{asset('storage').'/'. Auth::user()->photo}}" alt="...">
                                     <a href="#">
@@ -57,19 +57,18 @@
                     </div>
                 </div>
                 <div class="col-md-8 text-center">
-                    <form class="col-md-12" action=" " method="POST" enctype="multipart/form-data">
+                    <form class="col-md-12" action=" {{route('editer')}}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="card">
                             <div class="">
-                                <h5 class="title">{{ __('Editer mon profil') }}</h5>
+                                <h5 class="title">{{ __('Changer de photo') }}</h5>
                             </div>
                             <div class="card-body">
-                                <div class="row">
+                                {{-- <div class="row">
                                     <label class="col-md-3 col-form-label">{{ __('Email') }}</label>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control" placeholder="Email" value="{{ auth()->user()->email }}">
+                                            <input type="email" name="email" class="form-control" placeholder="Email"  >
                                         </div>
                                         @if ($errors->has('email'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -77,7 +76,7 @@
                                             </span>
                                         @endif
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
                                     <label class="col-md-3 col-form-label">{{ __('Photo') }}</label>
                                     <div class="col-md-9">
@@ -94,14 +93,13 @@
                             </div>
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-ntn  ">{{ __('Editer') }}</button>
+                                        <button type="submit" class="btn btn-ntn  ">{{ __('Changer') }}</button>
                                     </div>
                                 </div>
                         </div>
-                    </form>
-                    <form class="col-md-12" action=" " method="POST" >
+                    </form><br> <br>
+                    <form class="col-md-12" action=" {{ route('password.update') }}" method="POST" >
                         @csrf
-                        @method('PUT')
                         <div class="card">
                             <div class="">
                                 <h5 class="title">{{ __('Changer de password') }}</h5>
@@ -149,7 +147,7 @@
                             </div>
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-ntn  ">{{ __('Editer') }}</button>
+                                        <button type="submit" class="btn btn-ntn  ">{{ __('Changer') }}</button>
                                     </div>
                                 </div>
                         </div>

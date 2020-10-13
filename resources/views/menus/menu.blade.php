@@ -122,7 +122,7 @@
           <i class="far icofont-options"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
-          <a href=" {{route('profil')}}" class="dropdown-item ">
+          <a href=" {{route('profi')}}" class="dropdown-item ">
             <i class="icofont-business-man mr-2"></i> <span class="text-bold">Mon profile</span>
           </a>
           <div class="dropdown-divider"></div>

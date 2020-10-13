@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Communication;
+namespace App\Http\Controllers;
 
-use App\Categorie;
-use App\Event;
-use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class ProfilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +13,9 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
-        $categories=Categorie::all();
-        return view('pages.events.liste', compact('categories')); 
+    {
+        // return view('admin.profile.edit');
+        dd(\auth()->user());
     }
 
     /**
@@ -27,7 +25,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('pages.events.categorie');
+        //
     }
 
     /**
@@ -38,47 +36,40 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'nom'=> ['required','string']
-          ]);
-
-        Categorie::create([
-            'nom'=>$request->nom,
-        ]);     
-        return redirect()->route('events.create');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Categorie  $categorie
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($categorie)
+    public function show(User $user)
     {
-        return view('pages.events.detail', ['events'=>Event::where('categorie_id', '=', $categorie)->paginate(4)]);
-        
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Categorie  $categorie
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit(User $user)
     {
-        //
+         
+        // return view('admin.profile.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Categorie  $categorie
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -86,10 +77,10 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categorie  $categorie
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(User $user)
     {
         //
     }
