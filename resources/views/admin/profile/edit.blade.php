@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 text-center">
-                    <form class="col-md-12" action=" {{route('editer')}}" method="POST" enctype="multipart/form-data">
+                    <form class="col-md-12" action=" {{route('image')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card">
                             <div class="">
@@ -81,9 +81,9 @@
                                     <label class="col-md-3 col-form-label">{{ __('Photo') }}</label>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="file" name="photo" class="form-control" placeholder="photo" value="">
+                                            <input type="file" name="photo" class="form-control @error('image') is-invalid @enderror" placeholder="photo" value="">
                                         </div>
-                                        @if ($errors->has('email'))
+                                        @if ($errors->has('photo'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('photo') }}</strong>
                                             </span>
@@ -98,7 +98,7 @@
                                 </div>
                         </div>
                     </form><br> <br>
-                    <form class="col-md-12" action=" {{ route('password.update') }}" method="POST" >
+                    <form class="col-md-12" action=" {{ route('password') }}" method="POST" >
                         @csrf
                         <div class="card">
                             <div class="">

@@ -1,6 +1,6 @@
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light bgnav">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -16,19 +16,8 @@
         </script>
       </strong>
     </div>
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>  
     <div class=" ">
-      <a class="btn btn-ntn ml-2" href="{{route('portail')}}" class="nav-link">Portail</a>
+      <a class="btn btn-ntn ml-2" href="{{route('portail')}}" class="nav-link">Hors du bureau</a>
     </div>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -119,10 +108,10 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far icofont-options"></i>
+          <i class="far fa-user-circle"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
-          <a href=" {{route('profi')}}" class="dropdown-item ">
+          <a href=" {{route('profile')}}" class="dropdown-item ">
             <i class="icofont-business-man mr-2"></i> <span class="text-bold">Mon profile</span>
           </a>
           <div class="dropdown-divider"></div>
@@ -146,7 +135,7 @@
     </a>
   </div>
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar ">
       <!-- Sidebar user panel (optional) -->
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -190,6 +179,30 @@
                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>les rendus</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link">
+              <i class="nav-icon icofont-home"></i>
+              <p>
+                la caisse
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href=" {{route('admin.dpts.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>salaire</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>depenses</p>
                 </a>
               </li>
             </ul>
