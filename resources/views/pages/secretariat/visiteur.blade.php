@@ -63,8 +63,9 @@
               <label>Sexe</label>
               <select class="form-control custom-select @error('genre') is-invalid @enderror" name="genre" value="{{ old('genre') }}" >
                 <option >choisir le sexe</option>  
-                <option value="0">Homme</option>
-                  <option value="1">Femme</option>
+                @foreach ($cahier->getGenreOptions() as $key=>$value)
+                    <option value="{{$key}}" > {{$value}}</option>
+                  @endforeach
               </select>
                 @error('genre')
                   <span class="invalid-feedback" role="alert">

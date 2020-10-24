@@ -7,6 +7,9 @@
         <div class="card-header ">
           <h3 class="text-center">Cahier de visite</h3>
         </div>
+
+       
+
         <div class=" table table-responsive p-0">
           <table id="example1" class="table  table-hover">
             <thead>
@@ -22,7 +25,7 @@
               </tr>
             </thead>
             <tbody>
-                <?php $i=0; ?>
+              <?php $i=0; ?>
                 @foreach($cahiers as $cahier)
                 <?php $i++; ?>
                 <tr>
@@ -35,11 +38,11 @@
                   <td>{{$cahier->contact}}</td>
                   <td>{{$cahier->genre}}</td>
                   <td>
-                    <a href="{{route('cahier.edit',$cahier->id)}}"><button class="btn btn-ntn ">Editer</button></a>
+                    <a href="{{route('cahier.edit',$cahier->id)}}"><button class="btn btn-ntn "> <i class="fas fa-edit"></i></button></a>
                       <form action="{{route('cahier.destroy', $cahier->id)}}" method="post" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-warning d-inline">Suprimer</button>
+                        <button type="submit" class="btn btn-warning d-inline"><i class="fas fa-trash"></i></button>
                       </form>
                   </td>
                 </tr>

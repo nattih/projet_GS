@@ -5,7 +5,7 @@
     <div class="content-wrapper"> <br>
       <section class="content">
         <div class="container-fluid">
-          <div class="card">
+          <div class="card"  data-aos="fade-right">
             <div class="card-header">
               @can('delete-users')
               <a class="btn btn-ntn" href="{{ route('register') }}">{{ __('Ajouter un membre') }}</a>
@@ -33,13 +33,13 @@
                         <td >{{implode(' , ' , $user->roles()->get()->pluck('name')->toArray())}}</td>
                         <td >
                           @can('edit-users')
-                            <a href="{{route('admin.users.edit',$user->id)}}"><button class="btn btn-ntn">Editer</button></a>
+                            <a href="{{route('admin.users.edit',$user->id)}}"><button class="btn btn-ntn"><i class="fas fa-edit"></i></button></a>
                           @endcan
                             @can('delete-users')
                             <form action="{{route('admin.users.destroy',$user->id)}}" method="post" class="d-inline">
                               @csrf
                               @method('DELETE')
-                              <button type="submit" class="btn btn-warning">Suprimer</button>
+                              <button type="submit" class="btn btn-warning"><i class="fas fa-trash"></i></button>
                             </form>
                         @endcan
                         </td>

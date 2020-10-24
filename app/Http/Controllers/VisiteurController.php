@@ -14,34 +14,4 @@ class VisiteurController extends Controller
         $events=Event::where('categorie_id', '=', $categori->id)->get();
         return view('visiteurs.index',compact('events'));
     }
-    public function profil()
-    {
-    $user=\auth()->user();
-        return view('admin.profile.edit',compact('user'));
-    }
-
-    public function profile(){
-        $user=\auth()->user();
-        
-        if(request('photo')){
-            $imagePath=request('photo')->store('uploads','public');
-            $user->photo=$imagePath;
-          }
-        //   dd($user);
-        // $user->email=request('email');
-        // $user->password=request('password');
-        $user->save();
-        
-        return back();
-    }
-    public function password(){
-        $user=\auth()->user();
-        
-        //   dd($user);
-        // $user->email=request('email');
-        // $user->password=request('password');
-        $user->save();
-        
-        return back();
-    }
 }
