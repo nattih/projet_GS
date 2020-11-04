@@ -1,21 +1,14 @@
 @extends('layouts.app')
 @section('content')
+
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="content-wrapper"> <br>
       <section class="content">
         <div class="container-fluid">
-          <div class="card">
-            <div class="card-header">
-              @foreach ($dpts as $dpt)
-                    <a class="btn btn-info" href=" {{route('admin.dpts.show', $dpt->id)}}"> {{$dpt->nom}} </a> 
-                @endforeach
-            </div>
-          </div>
           <div class="card"  data-aos="fade-right">
             <div class="card-header">
               @can('delete-users')
-              <a class="btn btn-ntn" href="{{ route('register') }}"><i class="fa fa-plus" aria-hidden="true"></i> {{ __('Agent') }}</a>
-              <a class="btn btn-ntn" href="{{route('users.inactif')}}"><i class="fa icofont-archive" aria-hidden="true"></i> {{ __('Anciens Agent') }}</a>
+              <a class="btn btn-ntn" href="{{ route('register') }}">{{ __('Ajouter un membre') }}</a>
               @endcan
             </div>
             <div class="card-body table-responsive  p-0">
@@ -23,31 +16,29 @@
                 <thead>
                   <tr class="bg-dark">
                     <th scope="col">N°</th>
-                    <th scope="col">Nom & prénom(s)</th>
+                    <th scope="col">Nom</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Residence</th>
-                    <th scope="col">Poste</th>
+                    <th scope="col">Roles</th>
                     <th scope="col">Actions </th>
                   </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $key=>$user)
+                  <?php $i=0; ?>
+                @foreach($users as $user)
+                <?php $i++; ?>
                     <tr>
-                        <td scope="row">{{++$key}}</td>
+                        <td scope="row">{{$i}}</td>
                         <td >{{$user->name}} {{$user->prenom}}</td>
                         <td >{{$user->email}}</td>
-                        <td >{{$user->contact}}</td>
-                        <td >{{$user->residence}}</td>
-                        <td >{{$user->poste->nom}}</td>
+                        <td >{{implode(' , ' , $user->roles()->get()->pluck('name')->toArray())}}</td>
                         <td >
                           @can('edit-users')
-                            <a href="{{route('pers.edit',$user->id)}}"><button class="btn btn-ntn"><i class="fas fa-edit"></i></button></a>
+                            <a href="{{route('admin.users.edit',$user->id)}}"><button class="btn btn-ntn"><i class="fas fa-edit"></i></button></a>
                           @endcan
                             @can('delete-users')
-                            <form action="{{route('user.delete',$user->id)}}" method="post" class="d-inline">
+                            <form action="{{route('admin.users.destroy',$user->id)}}" method="post" class="d-inline">
                               @csrf
-                              @method('PUT')
+                              @method('DELETE')
                               <button type="submit" class="btn btn-warning"><i class="fas fa-trash"></i></button>
                             </form>
                         @endcan
@@ -56,9 +47,21 @@
               @endforeach
                 </tbody>
               </table>
+              <button id="test">test</button>
               {{$users->links()}}
             </div>
-          </div>
         </div>
       </section>
+      <script>
+        $('#test').click(function(){
+          alert('ok');
+        })
+        $(function () {
+          $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": true,
+          });
+
+        });
+      </script>
 @endsection

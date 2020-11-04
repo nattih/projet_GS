@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Categorie;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class EventsController extends Controller
 {
@@ -121,8 +120,7 @@ class EventsController extends Controller
      */
     public function destroy(Event $event)
     {
-        // Storage::delete('public/storage/'.$event->image);
         $event->delete();
-        return redirect()->back();
+        return redirect()->route('categories.show',$event);
     }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -42,23 +40,12 @@ class LoginController extends Controller
     }
     protected function redirectTo()
     {
-        if(Auth::user()->deleted_at==1){
-            Session::flash('message', 'Bienvenue'); 
-            Session::flash('alert-class', 'alert-primary text-center'); 
+        if (Auth::user()->roles->pluck('name')->contains('admin')) {
+           return '/admin/users';
+        } elseif (Auth::user()->roles->pluck('name')->contains('auteur')){
             return '/admin/users';
-        } 
-        else{
-            $this->guard()->logout();
-            Session::flash('message', 'Ce compte a été desactivé !'); 
-            Session::flash('alert-class', 'alert-danger text-center'); 
-            return '/login';
+        } else {
+            return '/home';
         }
     } 
-
-    public function logout(Request $request) {
-        Auth::logout();
-        Session::flash('message', 'Vous êtes déconnectés!'); 
-        Session::flash('alert-class', 'alert-success text-center'); 
-        return redirect('/login');
-      }
 }

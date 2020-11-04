@@ -7,7 +7,7 @@
             <div class="card col-6 ">
                 <div class=" ">
                     <div>
-                        <h4 class="text-center text-bold"> Nouveau département</h4>
+                        <h3 class="text-center text-bold">Ajouter un département</h3>
                     </div>  
                     <form action="{{route('admin.dpts.store')}}" method="post">
                             @csrf
@@ -21,8 +21,7 @@
                                 @enderror
                         </div>
                         <div class="col-auto">
-                                <button type="reset" class="btn btn-warning mb-2 float-right">Annuler</button>
-                                <button type="submit" class="btn btn-info mb-2 mr-2 float-right">Ajouter</button>
+                                <button type="submit" class="btn btn-primary mb-2 float-right">Enregistrer</button>
                         </div>
                     </form>
                 </div>  
@@ -30,9 +29,9 @@
             <div class="card col-6">
                 <div class=" ">
                     <div>
-                        <h4 class="text-center text-bold"> Nouveau poste</h4>
+                        <h3 class="text-center text-bold">Ajouter un poste</h3>
                     </div>  
-                    <form action="{{route('poste.store')}}" method="post">
+                    <form action="{{route('admin.user.store')}}" method="post">
                             @csrf
                         <div class="form-group">
                                 <label for="nom">Entrez le nom</label>
@@ -58,8 +57,7 @@
                                 @enderror
                           </div>
                         <div class="col-auto">
-                            <button type="reset" class="btn btn-warning mb-2 float-right">Annuler</button>
-                            <button type="submit" class="btn btn-info mb-2 mr-2 float-right">Ajouter</button>
+                                <button type="submit" class="btn btn-primary mb-2 float-right">Enregistrer</button>
                         </div>
                     </form>
                 </div>

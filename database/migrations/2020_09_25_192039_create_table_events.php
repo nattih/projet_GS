@@ -20,8 +20,8 @@ class CreateTableEvents extends Migration
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('description');
             $table->text('image');
-            $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

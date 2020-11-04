@@ -10,7 +10,7 @@
     <script src="{{asset('jquery/jquery-3.5.1.min.js')}}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href=" " rel="stylesheet">
-    @yield('extra-js')
+    
     {{-- pour dashboard  --}}
      <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('admin/plugins/fontawesome-free/css/all.min.css')}}">
@@ -22,7 +22,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"> --}}
+    <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}">
 
     {{-- TEMPLATE SITE WEB  --}}
  <!-- Favicons -->
@@ -66,10 +66,10 @@
     <script src="{{asset('admin/dist/js/pages/dashboard2.js')}}"></script>
     {{-- script dattable --}}
     
-    {{-- <!-- DataTables -->
+    <!-- DataTables -->
     <script  src="{{asset('DataTables/datatables.min.js')}}"></script>
     <script src="{{asset('DataTables/DataTables-1.10.22/js/dataTables.bootstrap4.min')}}"></script>
-    <script src="{{asset('DataTables/DataTables-1.10.22/js/jquery.dataTables.min')}}"></script> --}}
+    <script src="{{asset('DataTables/DataTables-1.10.22/js/jquery.dataTables.min')}}"></script>
     
     {{-- site web script --}}
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
