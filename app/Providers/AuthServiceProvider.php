@@ -29,12 +29,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         //les acces en une function grouper pour ne pas creer à chaq fois des isUsers....
         Gate::define('manage-users', function($user) {
-            return $user->hasAnyRole(['sg','admin']);
+            return $user->hasAnyRole(['auteur','admin']);
         });
         
         //une Gate qui nous permet d'avooir le droit de modifier un user ou pas
         Gate::define('edit-users', function ($user) {
-            return $user->hasAnyRole(['sg','admin']);
+            return $user->hasAnyRole(['auteur','admin']);
         });
             $this->registerPolicies();
         //une Gate qui nous permet d'avooir le droit de supprimer un user ou pas

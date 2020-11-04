@@ -4,9 +4,8 @@
   <div class="content-wrapper"> <br>
     <div class="container-fluid">
       <div class="card">
-        <div class="card-header">
-              <a class="btn btn-ntn" href="{{route('cahier.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> {{ __('Visiteur') }}</a>
-              <b class="text-center ml-3">Cahier de visite</b>
+        <div class="card-header ">
+          <h3 class="text-center">Cahier de visite</h3>
         </div>
 
        

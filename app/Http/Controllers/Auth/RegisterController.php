@@ -47,10 +47,9 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $user=new User();
         $dpts=Departement::all();
         $postes=Poste::all();
-        return view('auth.register',compact('dpts','postes','user'));
+        return view('auth.register',compact('dpts','postes'));
     }
 
     /**
@@ -59,58 +58,56 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'name' => ['required', 'string', 'max:255'],
-    //         'prenom' => ['required', 'string', 'max:255'],
-    //         'sexe' => ['required', 'integer'],
-    //         'dat_naiss' => ['required', 'string'],
-    //         'residence' => ['required', 'string'],
-    //         'contact' => ['required', 'string', 'max:8'],
-    //         'departement_id' => ['required', 'integer'],
-    //         'poste_id' => ['required', 'integer'],
-    //         'debut_fonction' => ['required', 'string'],
-    //         'contrat' => ['required', 'string'],
-    //         'photo' => ['required', 'image'],
-    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
-    //     ]);
-    // }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'prenom' => ['required', 'string', 'max:255'],
+            'sexe' => ['required', 'string'],
+            'dat_naiss' => ['required', 'string'],
+            'residence' => ['required', 'string'],
+            'contact' => ['required', 'string', 'max:8'],
+            'departement_id' => ['required', 'integer'],
+            'poste_id' => ['required', 'integer'],
+            'debut_fonction' => ['required', 'string'],
+            'contrat' => ['required', 'string'],
+            'photo' => ['required', 'image'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\User
      */
-    // protected function create(array $data)
-    // {
-
-    //     $imagePath=request('photo')->store('uploads','public');
-    //     $user= User::create([
-    //         'name' => $data['name'],
-    //         'prenom' => $data['prenom'],
-    //         'sexe' => $data['sexe'],
-    //         'dat_naiss' => $data['dat_naiss'],
-    //         'residence' => $data['residence'],
-    //         'contact' => $data['contact'],
-    //         'departement_id' => $data['departement_id'],
-    //         'poste_id' => $data['poste_id'],
-    //         'debut_fonction' => $data['debut_fonction'],
-    //         'contrat' => $data['contrat'],
-    //         'photo' => $imagePath,
-    //         'email' => $data['email'],
-    //         'password' => Hash::make($data['password']),
-    //     ]);
-
-    //     // assigner un role utilisateur par defaut à les auttres inscription
-    //     $role = Role::select('id')->where('name', 'agent')->first();
-    //     $user->roles()->attach($role);
-    //     return $user;
-    // } 
+    protected function create(array $data)
+    {
+        $imagePath=request('photo')->store('uploads','public');
+        $user= User::create([
+            'name' => $data['name'],
+            'prenom' => $data['prenom'],
+            'sexe' => $data['sexe'],
+            'dat_naiss' => $data['dat_naiss'],
+            'residence' => $data['residence'],
+            'contact' => $data['contact'],
+            'departement_id' => $data['departement_id'],
+            'poste_id' => $data['poste_id'],
+            'debut_fonction' => $data['debut_fonction'],
+            'contrat' => $data['contrat'],
+            'photo' => $imagePath,
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+        // assigner un role utilisateur par defaut à les auttres inscription
+        $role = Role::select('id')->where('name', 'utilisateur')->first();
+        $user->roles()->attach($role);
+        return $user;
+    } 
     // protected function redirectTo()
     // {
-    //     $this->guard()->logout();
-    //     return redirect()->back();
+    //     return redirect()->route('admin.user.index');
     // }
 }
