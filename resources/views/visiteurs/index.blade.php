@@ -2,32 +2,32 @@
 <html lang="en">
 
 <head>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Medicio</title>
+  <title>Entreprise</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
+  <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/icofont/icofont.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/venobox/venobox.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
   <!-- =======================================================
   * Template Name: Medicio - v2.0.0
   * Template URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
@@ -35,9 +35,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-
 <body>
-
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -67,25 +65,7 @@
           <li><a href="#services">Nos services</a></li>
           <li><a href="#departments">Actualités</a></li>
           <li><a href="#doctors">Personnels</a></li>
-          <!-- <li class="drop-down"><a href="">Drop Down</a>
-          <ul>
-            <li><a href="#">Drop Down 1</a></li>
-            <li class="drop-down"><a href="#">Deep Drop Down</a>
-              <ul>
-                <li><a href="#">Deep Drop Down 1</a></li>
-                <li><a href="#">Deep Drop Down 2</a></li>
-                <li><a href="#">Deep Drop Down 3</a></li>
-                <li><a href="#">Deep Drop Down 4</a></li>
-                <li><a href="#">Deep Drop Down 5</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Drop Down 2</a></li>
-            <li><a href="#">Drop Down 3</a></li>
-            <li><a href="#">Drop Down 4</a></li>
-          </ul>
-        </li> -->
           <li><a href="#contact">Contact</a></li>
-           
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -337,38 +317,74 @@
             </div>
           </div>
         </div>
-
       </div>
     </section><!-- End Departments Section -->
 
     <!-- ======= Appointment Section ======= -->
     <section id="appointment" class="appointment section-bg ">
       <div class="container" data-aos="fade-up">
-
         <div class="section-title">
           <h2>Sommettre une offre</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Veillez renseigner coorectement le formulaire!</p>
+          <p class="text-danger">NB: le dossier doit etre de format pdf</p>
         </div>
-
-        <form action="forms/appointment.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
+        <form action=" {{route('offre.store')}}" method="post" enctype="multipart/form-data">
+          @csrf
           <div class="form-row">
-           
             <div class="col-md-4 form-group">
-              <select name="department" id="department" class="form-control">
-                <option value="">le type d''offre</option>
-                <option value="Department 0">Emploi</option>
-                <option value="Department 1">Stage</option>
+              <select name="offre" id="offre" class="form-control @error('offre') is-invalid @enderror">
+                <option value="">Choisir l'offre</option>
+                @foreach ($offre->getOffreOptions() as $key=>$value)
+                  <option value="{{$key}}"> {{$value}}</option>
+                @endforeach
               </select>
-              <div class="validate"></div>
+              @error('offre')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+              @enderror
             </div>
             <div class="col-md-4 form-group">
-              <input type="file" class="form-control" name="document" id="document" placeholder="Votre dossier" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
+              <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" id="nom" placeholder="Votre nom et prenom"  >
+              @error('nom')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+            @enderror
             </div>
-            <div class="text-center"><button type="submit">Soumettre</button></div>
+            <div class="col-md-4 form-group">
+              <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Votre email"  >
+              @error('email')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+            </div>
+            <div class="col-md-4 form-group">
+              <input type="text" class="form-control @error('motif') is-invalid @enderror" name="motif" id="motif" placeholder="l'objet de votre offre"  >
+              @error('motif')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+            </div>
+            <div class="col-md-4 form-group">
+              <input type="file" class="form-control @error('dossier') is-invalid @enderror" name="dossier" id="dossier" placeholder="Votre dossier en pdf, taille maxi:2MO"  >
+              @error('dossier')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+            </div>
+            <div class="text-center"><input class="form-control text-white  bg-info " type="submit" value="Sommettre"></div>
+            <div class="text-center"><input class="form-control text-white  bg-danger" type="reset" value="Annuler"></div>
           </div>
         </form>
-
+        <div class=" mt-2">
+					@if(Session::has('message'))
+					<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+				   @endif
+				</div>
       </div>
     </section><!-- End Appointment Section -->
 
@@ -377,11 +393,10 @@
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>Notre équipe</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p> Une équipe compétente pour vous servir en temps réel</p>
         </div>
 
         <div class="row">
-
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
@@ -453,19 +468,16 @@
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </section><!-- End Doctors Section -->
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
       <div class="container" data-aos="fade-up">
-
         <div class="section-title">
           <h2>Galleries</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p> bienvenue à notre espace galerie</p>
         </div>
 
         <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
@@ -485,14 +497,11 @@
     <!-- ======= Frequently Asked Questioins Section ======= -->
     <section id="faq" class="faq section-bg">
       <div class="container" data-aos="fade-up">
-
         <div class="section-title">
           <h2>Foire aux questions</h2>
           <strong><p>Pour trouver certaines reponses à vos questions, cliquez sur ces onglets</p></strong>
         </div>
-
         <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
-
           <li>
             <a data-toggle="collapse" class="" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="icofont-simple-up"></i></a>
             <div id="faq1" class="collapse show" data-parent=".faq-list">
@@ -546,33 +555,25 @@
               </p>
             </div>
           </li>
-
         </ul>
-
       </div>
     </section><!-- End Frequently Asked Questioins Section -->
-
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
-
         <div class="section-title">
           <h2>Contact</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p> Pour tout besoin d'assistance, veillez remplir ce formulaire'</p>
         </div>
-
       </div>
-
+{{-- 
       <div>
         <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-      </div>
+      </div> --}}
 
       <div class="container">
-
         <div class="row mt-5">
-
           <div class="col-lg-6">
-
             <div class="row">
               <div class="col-md-12">
                 <div class="info-box">
@@ -585,7 +586,7 @@
                 <div class="info-box mt-4">
                   <i class="bx bx-envelope"></i>
                   <h3>Email</h3>
-                  <p>info@medico.com<br>contact@medico.com</p>
+                  <p>info@entreprise.com<br>contact@entreprise.com</p>
                 </div>
               </div>
               <div class="col-md-6">
@@ -596,43 +597,62 @@
                 </div>
               </div>
             </div>
-
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="{{route('contact.store')}}" method="post" id="formContact" role="form">
+              @csrf
               <div class="form-row">
                 <div class="col form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder=" Nom" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validate"></div>
+                  <input type="text" name="nom" class="form-control @error('nom') is-invalid @enderror" id="nom" placeholder=" Entrez votre nom et prenom"/>
+                  @error('nom')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
                 </div>
                 <div class="col form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validate"></div>
+                  <input type="email" class="form-control @error('email') is-invalid @enderror"  name="email" id="email" placeholder="Votre Email"    />
+                   @error('email')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Objet" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                <div class="validate"></div>
+                <input type="text" class="form-control @error('objet') is-invalid @enderror" name="objet" id="objet" placeholder="Objet "  />
+                 @error('objet')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                <div class="validate"></div>
+                <textarea class="form-control @error('message') is-invalid @enderror" name="message" rows="5"    placeholder="Message"></textarea>
+                 @error('message')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
               </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">votre message a été envoyé. Merci!</div>
+              <div class="mb-3"> 
+                <div class=" mt-2">
+                  @if(Session::has('message'))
+                  <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                  @endif
+				        </div>
               </div>
-              <div class="text-center"><button type="submit">Envoyer</button></div>
+              <div class="text-center  d-flex">
+                <button class="btn btn-info" id="submit" type="submit">Envoyer</button>
+                <button  class="btn btn-warning ml-2" type="reset">Annuler</button>
+              </div>
+              <div id="bloc_message"></div>
             </form>
           </div>
-
         </div>
-
       </div>
     </section><!-- End Contact Section -->
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -640,10 +660,9 @@
     <div class="footer-top">
       <div class="container">
         <div class="row">
-
           <div class="col-lg-3 col-md-6">
             <div class="footer-info">
-              <h3>Medicio</h3>
+              <h3>Entreprise</h3>
               <p>
                  Ouagadougou Avenue Natti <br>
                 Rue 536, BF<br><br>
@@ -663,7 +682,7 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Liens utiles</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="">Accueil</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{route('portail')}}">Accueil</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">A Propos</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Nos services</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
@@ -688,9 +707,7 @@
             <form action="" method="post">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
-
           </div>
-
         </div>
       </div>
     </div>
@@ -700,10 +717,6 @@
         &copy; Copyright <strong><span>Medicio</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medicio-free-bootstrap-theme/ -->
         Designed by <a href="{{route('portail')}}">nth@</a>
       </div>
     </div>
@@ -711,21 +724,32 @@
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="assets/vendor/counterup/counterup.min.js"></script>
-  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-
+  <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/waypoints/jquery.waypoints.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/counterup/counterup.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/venobox/venobox.min.js')}}"></script>
+  <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="{{asset('assets/js/main.js')}}"></script>
 
+  <script> 
+  function save()
+   var formdata = $('#formContact').serialize(); // here $(this) refere to the form its submitting
+    $.ajax({
+	    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    	},
+        type: 'POST',
+        url: "{{ url('/')}}",
+        data: formdata, // here $(this) refers to the ajax object not form
+        success: function (data) {
+           $('#bloc_message').html('<div class="alert alert-success">Votre message a été transmis, merci!<div>')
+        },
+    });
+      </script>
 </body>
-
 </html>

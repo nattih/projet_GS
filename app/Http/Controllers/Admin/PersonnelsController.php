@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Departement;
 use App\Http\Controllers\Controller;
+use App\Poste;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,9 @@ class PersonnelsController extends Controller
      */
     public function index()
     {
-         $dpts=Departement::all();
-        return view('pages.liste',compact('dpts'));
+        $users=User::latest()->paginate(3);
+         $dpts=Departement::latest()->get();
+        return view('admin.departement.liste',compact('dpts','users'));
     }
 
     /**
@@ -49,6 +51,20 @@ class PersonnelsController extends Controller
         return redirect()->route('admin.dpts.create');
     }
 
+    public function poste_store(Request $request)
+    {
+        request()->validate([
+            'nom'=> ['required','string'],
+            'departement_id'=> ['required','string']
+          ]);
+
+        Poste::create([
+            'nom'=>$request->nom,
+            'departement_id'=>$request->departement_id,
+        ]);     
+        return redirect()->route('register');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -66,9 +82,12 @@ class PersonnelsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    
+    public function pers_edit(User $user)
     {
-        // return view('admin.profil.edit', compact('user'));
+        $dpts=Departement::all();
+        $postes=Poste::all();
+        return view('admin.departement.edit', compact('user','dpts','postes'));
     }
 
     /**
@@ -78,9 +97,21 @@ class PersonnelsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function pers_update(Request $request, User $user)
     {
-        //
+        $user->name=$request->name;
+        $user->prenom=$request->prenom;
+        $user->contact=$request->contact;
+        $user->residence=$request->residence;
+        $user->sexe=$request->sexe;
+        $user->dat_naiss=$request->dat_naiss;
+        $user->contrat=$request->contrat;
+        $user->debut_fonction=$request->debut_fonction;
+        $user->departement_id=$request->departement_id;
+        $user->poste_id=$request->poste_id;
+        $user->save();
+        
+        return redirect()->back();
     }
 
     /**

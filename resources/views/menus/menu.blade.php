@@ -1,6 +1,6 @@
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light bgnav">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -16,19 +16,8 @@
         </script>
       </strong>
     </div>
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>  
     <div class=" ">
-      <a class="btn btn-ntn ml-2" href="{{route('portail')}}" class="nav-link">Portail</a>
+      <a class="btn btn-ntn ml-2" href="{{route('portail')}}" class="nav-link">Hors du bureau</a>
     </div>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -91,38 +80,33 @@
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
+      @unless (auth()->user()->unreadNotifications->isEmpty())
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          <span class="badge badge-warning navbar-badge"> {{auth()->user()->unreadNotifications->count()}}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">15 Notifications</span>
+          @foreach (auth()->user()->unreadNotifications as $notification)
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
+          <a href=" {{route('show.notification', ['rendu'=> $notification->data['renduId'] , 'notification' => $notification->id])}}" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> {{$notification->data['name']}} commente sur
+            <strong><span class="  text-muted text-sm  "> {{$notification->data['renduTitre']}}</span></strong>
           </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
+          @endforeach
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
+      @endunless
+      
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far icofont-options"></i>
+        <a class="nav-link" data-toggle="dropdown" href="">
+          <i class="far fa-user-circle"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
-          <a href=" {{route('profi')}}" class="dropdown-item ">
+          <a href=" {{route('profile')}}" class="dropdown-item ">
             <i class="icofont-business-man mr-2"></i> <span class="text-bold">Mon profile</span>
           </a>
           <div class="dropdown-divider"></div>
@@ -146,13 +130,9 @@
     </a>
   </div>
     <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <!-- Sidebar Menu -->
+    <div class="sidebar ">
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
             <a href="{{route('admin.users.index')}}" class="nav-link active ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -163,10 +143,18 @@
            
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.user.index')}}" class="nav-link ">
+            <a href="{{route('users.actif')}}" class="nav-link ">
               <i class="nav-icon  icofont-options"></i>
               <p>
-                Gestion
+                Administration
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('rendu.create')}}" class="nav-link ">
+              <i class="nav-icon  icofont-papers"></i>
+              <p>
+                Rendre un document
               </p>
             </a>
           </li>
@@ -174,7 +162,7 @@
             <a href="" class="nav-link">
               <i class="nav-icon icofont-users"></i>
               <p>
-                le personel
+                Personel
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">2</span>
               </p>
@@ -183,13 +171,37 @@
               <li class="nav-item">
                 <a href=" {{route('admin.dpts.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>liste</p>
+                  <p>Liste du personel</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('rendu')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Les rendus</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link">
+              <i class="nav-icon icofont-bank"></i>
+              <p>
+                Finance
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href=" {{route('users.salaire')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Salaire</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>les rendus</p>
+                  <p>Depenses</p>
                 </a>
               </li>
             </ul>
@@ -205,13 +217,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{route('emploi')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Emplois</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{{route('stage')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Stage</p>
                 </a>
@@ -219,28 +231,8 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon  icofont-address-book"></i>
-              <p>
-                Cahier de visite
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('cahier.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ajouter un visiteurs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('cahier.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Nos visiteurs</p>
-                </a>
-              </li>
-            </ul>
+            <a class="nav-link "  href="{{ route('cahier.index') }}">
+              <i class="nav-icon icofont-address-book"></i> Cahier de visiteur </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -264,34 +256,26 @@
                   <p>Nos evenements</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('message')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Messages</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="{{route('events.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon icofont-news"></i>
               <p>
-                Salon
-                 
+                Espace membre
               </p>
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon icofont-archive"></i>
-              <p>
-                Archives
-                 
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a class="nav-link "  href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+            <a class="nav-link "  href="{{ route('logout') }}">
               <i class="nav-icon icofont-exit"></i> Deconnexion </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-              </form>
           </li>
-          
         </ul>
       </nav>
     </div>

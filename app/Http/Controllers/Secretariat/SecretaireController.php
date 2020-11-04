@@ -25,8 +25,8 @@ class SecretaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
-        $cahier=Cahier::all();
+    
+    {   $cahier=new Cahier();
         return view('pages.secretariat.visiteur',compact('cahier'));
     }
     /**
@@ -37,15 +37,14 @@ class SecretaireController extends Controller
      */
     public function store(Request $request)
     {
-        // request()->validate([
-        //     'nom'=> ['required','string','max:15'],
-        //     'prenom'=> ['required','string'],
-        //     'cnib'=> ['required','string','min:8'],
-        //     'contact'=> ['required','string','min:8'],
-        //     'motif'=> ['required','string'],
-        //     'genre'=> ['required','integer'],
-        //     'user_id'=> ['required','integer']
-        //   ]);
+        request()->validate([
+            'nom'=> ['required','string','max:15'],
+            'prenom'=> ['required','string'],
+            'cnib'=> ['required','string','min:8'],
+            'contact'=> ['required','string','min:8'],
+            'motif'=> ['required','string'],
+            'genre'=> ['required','integer'],
+          ]);
         Cahier::create([
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,

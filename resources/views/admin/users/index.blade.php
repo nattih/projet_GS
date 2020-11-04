@@ -2,30 +2,32 @@
 
 @section('content')
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper bg"> <br>
+    <div class="content-wrapper "> <br>
       <section class="content ">
         <div class="container-fluid">
-          <div class="row">
-            <section id="hero" class="d-flex flex-column justify-content-center align-items-center text-center">
-              <div class="hero-container " data-aos="fade-in">
-                <h1 class="text-info ">BIENVENUE DANS VOTRE ESPACE DE TRAVAIL</h1>
-                <p><span class="typed" data-typed-items="Designer, Developer, Freelancer, Photographer"></span></p>
-              </div>
-            </section>
-          </div>
+          <div class=" mt-2">
+            @if(Session::has('message'))
+              <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+            @endif
+				  </div>
+          <div class="card " id="bgPhto">
+              <section  data-aos="fade-right">
+                <div class="section-title">
+                  <h2>BIENVUE A VOTRE ESPACE DE TRAVAIL</h2>
+                </div>
+
+                {{-- <img src="{{asset('assets/img/about.jpg')}}" alt="image"> --}}
+              </section>
+        </div>
       </div>
       </section>
     </div>         
-  
-    <!-- Main Footer -->
     <footer class="main-footer">
-      <strong>Copyright &copy; 2020  <a href="http://adminlte.io">nth_design</a>.</strong>
+      <b>Copyright &copy; 2020  <a href="{{route('portail')}}">nth_design</a>.</b>
       Tout droit reservé.
       <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 1.0
       </div>
     </footer>
   </div>
-  <!-- ./wrapper -->
 @endsection
