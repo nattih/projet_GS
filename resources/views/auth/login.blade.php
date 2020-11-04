@@ -33,6 +33,11 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+				<div class="mt-2">
+					@if(Session::has('message'))
+					<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+				   @endif
+				</div>
 				<div class="login100-form-title" style="background-image:url(auth/images/bg-01.jpg);">
 					<span class="login100-form-title-1">
 						Se connecter

@@ -5,15 +5,13 @@
       <section class="content">
         <div class="container-fluid">
           <div class="container">
-            <p class="text-center text-bold"> <span>Nouveau membre</span> 
-              <a class="btn btn-success" href="{{ route('admin.dpts.create') }}">Nouveau dpt/poste</a>
-            </p>
+            <p class="text-center text-bold">Nouveau membre</p>
               <hr>
             <div class="row justify-content-center">
               <div class="col-md-12">
                 <div class="card">
                   <article class="card-body"> 
-                    <form action="" method="post"  enctype="multipart/form-data">
+                    <form action="{{route('admin.users.store')}}" method="post"  enctype="multipart/form-data">
                       @csrf
                       <div class="form-row">
                         <div class="col form-group">
@@ -40,8 +38,9 @@
                           <label>Sexe</label>
                           <select id="inputState" class="form-control custom-select @error('sexe') is-invalid @enderror" type="text" name="sexe" placeholder="" value="{{ old('sexe') }}">
                             <option> Choose...</option>
-                              <option value="homme">Homme</option>
-                              <option value="femme">Femme</option>
+                              @foreach ($user->getSexeOptions() as $key=>$value)
+                                <option value="{{$key}}"> {{$value}}</option>
+                              @endforeach
                           </select>
                               @error('sexe')
                                   <span class="invalid-feedback" role="alert">
@@ -51,7 +50,7 @@
                         </div>
                         <div class="form-group col-md-6">
                           <label>Date et lieu de naissance</label>
-                          <input type="text" class="form-control @error('dat_naiss') is-invalid @enderror" type="text" name="dat_naiss" placeholder="" value="{{ old('dat_naiss') }}">
+                          <input type="date" class="form-control @error('dat_naiss') is-invalid @enderror" type="text" name="dat_naiss" placeholder="" value="{{ old('dat_naiss') }}">
                             @error('dat_naiss')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -112,7 +111,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-6">
                           <label>Debut de fonction</label>
-                          <input type="text" class="form-control @error('debut_fonction') is-invalid @enderror" type="text" name="debut_fonction" placeholder="" value="{{ old('debut_fonction') }}">
+                          <input type="date" class="form-control @error('debut_fonction') is-invalid @enderror" type="text" name="debut_fonction" placeholder="" value="{{ old('debut_fonction') }}">
                             @error('debut_fonction')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>

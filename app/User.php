@@ -17,8 +17,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'prenom', 'sexe', 'dat_naiss','residence', 'contact', 'departement_id',
-        'poste_id', 'debut_function', 'contrat', 'photo','email', 'password'
+        'poste_id', 'debut_fonction', 'contrat', 'photo','email', 'password', 'deleted_at','salaire'
     ];
+
+    public function getSexeAttribute($attributes){
+        return  $this->getSexeOptions()[$attributes];
+   }
+    public function getSexeOptions(){
+        return [
+            '0'=>'homme',
+            '1'=>'femme',
+        ];
+   }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -53,16 +63,19 @@ class User extends Authenticatable
             
         }
         public function cahiers(){
-            return $this ->belongsToMany('App\Cahier');
+            return $this ->hasMany('App\Cahier');
         }
         public function events(){
-            return $this ->belongsTo('App\Event');
+            return $this ->hasMany('App\Event');
         }
         public function departement(){
             return $this ->belongsTo('App\Departement');
         }
         public function poste(){
             return $this ->belongsTo('App\Poste');
+        }
+        public function rendus(){
+            return $this ->hasMany('App\Rendu');
         }
    }
 
