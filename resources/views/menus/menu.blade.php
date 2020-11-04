@@ -102,7 +102,11 @@
       @endunless
       
       <li class="nav-item dropdown">
+<<<<<<< HEAD
         <a class="nav-link" data-toggle="dropdown" href="">
+=======
+        <a class="nav-link" data-toggle="dropdown" href="#">
+>>>>>>> 532197dd2d43c8d45040c493d3d41c886521e6c6
           <i class="far fa-user-circle"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
@@ -131,6 +135,11 @@
   </div>
     <!-- Sidebar -->
     <div class="sidebar ">
+<<<<<<< HEAD
+=======
+      <!-- Sidebar user panel (optional) -->
+      <!-- Sidebar Menu -->
+>>>>>>> 532197dd2d43c8d45040c493d3d41c886521e6c6
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item has-treeview menu-open">
@@ -184,7 +193,35 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="" class="nav-link">
+<<<<<<< HEAD
               <i class="nav-icon icofont-bank"></i>
+=======
+              <i class="nav-icon icofont-home"></i>
+              <p>
+                la caisse
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href=" {{route('admin.dpts.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>salaire</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>depenses</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+>>>>>>> 532197dd2d43c8d45040c493d3d41c886521e6c6
               <p>
                 Finance
                 <i class="fas fa-angle-left right"></i>

@@ -17,6 +17,7 @@ class VisiteurController extends Controller
         $events=Event::where('categorie_id', '=', $categori->id)->get();
         return view('visiteurs.index',compact('events','offre'));
     }
+<<<<<<< HEAD
 
     public function offre_store(Request $request)
     {
@@ -74,4 +75,6 @@ class VisiteurController extends Controller
        $mgs=  Contact::latest()->paginate(4);
         return view('admin.offre.contact', compact('mgs'));
     }
+=======
+>>>>>>> 532197dd2d43c8d45040c493d3d41c886521e6c6
 }

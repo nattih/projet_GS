@@ -37,7 +37,11 @@
                             @can('delete-users')
                             <form action="{{route('user.delete',$user->id)}}" method="post" class="d-inline">
                               @csrf
+<<<<<<< HEAD:resources/views/admin/users/manager.blade.php
                               @method('PUT')
+=======
+                              @method('DELETE')
+>>>>>>> 532197dd2d43c8d45040c493d3d41c886521e6c6:resources/views/pages/manager.blade.php
                               <button type="submit" class="btn btn-warning"><i class="fas fa-trash"></i></button>
                             </form>
                         @endcan

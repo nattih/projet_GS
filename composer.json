@@ -19,7 +19,10 @@
         "laravel/ui": "^2.1",
         "livewire/livewire": "^2.3",
         "maatwebsite/excel": "^3.1",
+<<<<<<< HEAD
         "realrashid/sweet-alert": "^3.1",
+=======
+>>>>>>> 532197dd2d43c8d45040c493d3d41c886521e6c6
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "^9.11"
     },

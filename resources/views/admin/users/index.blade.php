@@ -5,11 +5,14 @@
     <div class="content-wrapper "> <br>
       <section class="content ">
         <div class="container-fluid">
+<<<<<<< HEAD
           <div class=" mt-2">
             @if(Session::has('message'))
               <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
             @endif
 				  </div>
+=======
+>>>>>>> 532197dd2d43c8d45040c493d3d41c886521e6c6
           <div class="card " id="bgPhto">
               <section  data-aos="fade-right">
                 <div class="section-title">

@@ -8,6 +8,9 @@
               <a class="btn btn-ntn" href="{{route('cahier.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> {{ __('Visiteur') }}</a>
               <b class="text-center ml-3">Cahier de visite</b>
         </div>
+
+       
+
         <div class=" table table-responsive p-0">
           <table id="example1" class="table  table-hover">
             <thead>
